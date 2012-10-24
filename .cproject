@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?fileVersion 4.0.0?><cproject storage_type_id="org.eclipse.cdt.core.XmlProjectDescriptionStorage">
+	<storageModule moduleId="org.eclipse.cdt.core.settings">
+		<cconfiguration id="0.1865790531">
+			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="0.1865790531" moduleId="org.eclipse.cdt.core.settings" name="Default">
+				<externalSettings/>
+				<extensions>
+					<extension id="org.eclipse.cdt.core.VCErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.GmakeErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.CWDLocator" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.GCCErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.GASErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.GLDErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+				</extensions>
+			</storageModule>
+			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
+				<configuration buildProperties="" description="" id="0.1865790531" name="Default" parent="org.eclipse.cdt.build.core.prefbase.cfg">
+					<folderInfo id="0.1865790531." name="/" resourcePath="">
+						<toolChain id="org.eclipse.cdt.build.core.prefbase.toolchain.707050098" name="No ToolChain" resourceTypeBasedDiscovery="false" superClass="org.eclipse.cdt.build.core.prefbase.toolchain">
+							<targetPlatform id="org.eclipse.cdt.build.core.prefbase.toolchain.707050098.1679573186" name=""/>
+							<builder id="org.eclipse.cdt.build.core.settings.default.builder.38541528" keepEnvironmentInBuildfile="false" managedBuildOn="false" name="Gnu Make Builder" superClass="org.eclipse.cdt.build.core.settings.default.builder"/>
+							<tool id="org.eclipse.cdt.build.core.settings.holder.libs.1332046392" name="holder for library settings" superClass="org.eclipse.cdt.build.core.settings.holder.libs"/>
+							<tool id="org.eclipse.cdt.build.core.settings.holder.991348414" name="Assembly" superClass="org.eclipse.cdt.build.core.settings.holder">
+								<option id="org.eclipse.cdt.build.core.settings.holder.incpaths.741154405" name="Include Paths" superClass="org.eclipse.cdt.build.core.settings.holder.incpaths" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${chibios}/boards/ST_STM32L_DISCOVERY&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${chibios}/os/hal/platforms/STM32&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${chibios}/os/hal/include&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${chibios}/os/ports/common/ARMCMx/CMSIS/include/&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${chibios}/os/kernel/include&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${chibios}/os/ports/common/ARMCMx&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${chibios}/os/ports/GCC/ARMCMx&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${chibios}/os/ports/GCC/ARMCMx/STM32L1xx&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${chibios}/hal/platforms/STM32/DMAv1&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${chibios}/os/hal/platforms/STM32/USBv1&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${chibios}/os/various&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${chibios}/os/hal/platforms/STM32L1xx&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${gcc-arm-none-eabi}/arm-none-eabi/include&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${chibios}/os/hal/platforms/STM32/GPIOv2&quot;"/>
+								</option>
+								<inputType id="org.eclipse.cdt.build.core.settings.holder.inType.893759171" languageId="org.eclipse.cdt.core.assembly" languageName="Assembly" sourceContentType="org.eclipse.cdt.core.asmSource" superClass="org.eclipse.cdt.build.core.settings.holder.inType"/>
+							</tool>
+							<tool id="org.eclipse.cdt.build.core.settings.holder.1892701452" name="GNU C++" superClass="org.eclipse.cdt.build.core.settings.holder">
+								<option id="org.eclipse.cdt.build.core.settings.holder.incpaths.377216863" name="Include Paths" superClass="org.eclipse.cdt.build.core.settings.holder.incpaths" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${chibios}/boards/ST_STM32L_DISCOVERY&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${chibios}/os/hal/platforms/STM32&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${chibios}/os/hal/include&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${chibios}/os/ports/common/ARMCMx/CMSIS/include/&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${chibios}/os/kernel/include&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${chibios}/os/ports/common/ARMCMx&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${chibios}/os/ports/GCC/ARMCMx&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${chibios}/os/ports/GCC/ARMCMx/STM32L1xx&quot;"/>
+									<listOptionValue builtIn="false" value="/os/hal/platforms/STM32L1xx"/>
+									<listOptionValue builtIn="false" value="&quot;${chibios}/hal/platforms/STM32/DMAv1&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${chibios}/os/hal/platforms/STM32/USBv1&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${chibios}/os/various&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${chibios}/os/hal/platforms/STM32L1xx&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${gcc-arm-none-eabi}/arm-none-eabi/include&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${gcc-arm-none-eabi}/os/hal/platforms/STM32L1xx&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${chibios}/os/hal/platforms/STM32/GPIOv2&quot;"/>
+								</option>
+								<inputType id="org.eclipse.cdt.build.core.settings.holder.inType.1033068672" languageId="org.eclipse.cdt.core.g++" languageName="GNU C++" sourceContentType="org.eclipse.cdt.core.cxxSource,org.eclipse.cdt.core.cxxHeader" superClass="org.eclipse.cdt.build.core.settings.holder.inType"/>
+							</tool>
+							<tool id="org.eclipse.cdt.build.core.settings.holder.627236101" name="GNU C" superClass="org.eclipse.cdt.build.core.settings.holder">
+								<option id="org.eclipse.cdt.build.core.settings.holder.incpaths.1153822034" name="Include Paths" superClass="org.eclipse.cdt.build.core.settings.holder.incpaths" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${chibios}/boards/ST_STM32L_DISCOVERY&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${chibios}/os/hal/platforms/STM32&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${chibios}/os/hal/include&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${chibios}/os/ports/common/ARMCMx/CMSIS/include/&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${chibios}/os/kernel/include&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${chibios}/os/ports/common/ARMCMx&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${chibios}/os/ports/GCC/ARMCMx&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${chibios}/os/ports/GCC/ARMCMx/STM32L1xx&quot;"/>
+									<listOptionValue builtIn="false" value="/os/hal/platforms/STM32L1xx"/>
+									<listOptionValue builtIn="false" value="&quot;${chibios}/hal/platforms/STM32/DMAv1&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${chibios}/os/hal/platforms/STM32/USBv1&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${chibios}/os/various&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${chibios}/os/hal/platforms/STM32L1xx&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${gcc-arm-none-eabi}/arm-none-eabi/include&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${gcc-arm-none-eabi}/os/hal/platforms/STM32L1xx&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${chibios}/os/hal/platforms/STM32/GPIOv2&quot;"/>
+								</option>
+								<inputType id="org.eclipse.cdt.build.core.settings.holder.inType.2133147299" languageId="org.eclipse.cdt.core.gcc" languageName="GNU C" sourceContentType="org.eclipse.cdt.core.cSource,org.eclipse.cdt.core.cHeader" superClass="org.eclipse.cdt.build.core.settings.holder.inType"/>
+							</tool>
+						</toolChain>
+					</folderInfo>
+				</configuration>
+			</storageModule>
+			<storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
+		</cconfiguration>
+	</storageModule>
+	<storageModule moduleId="cdtBuildSystem" version="4.0.0">
+		<project id="stm32l-video.null.796270699" name="stm32l-video"/>
+	</storageModule>
+	<storageModule moduleId="scannerConfiguration">
+		<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		<scannerConfigBuildInfo instanceId="0.1865790531">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		</scannerConfigBuildInfo>
+	</storageModule>
+	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
+	<storageModule moduleId="refreshScope"/>
+</cproject>
