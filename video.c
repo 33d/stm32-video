@@ -45,6 +45,7 @@ CH_IRQ_HANDLER(TIM4_IRQHandler) {
 
     // start the DMA transfer for this line, if there's any data
     if (video_next_line) {
+        DMA1_Channel5->CMAR = (uint32_t) video_next_line; // where to read from
         DMA1_Channel5->CCR &= ~DMA_CCR5_EN;
         DMA1_Channel5->CNDTR = video_cols / 8;
         DMA1_Channel5->CCR |= DMA_CCR5_EN;
@@ -101,19 +102,10 @@ void video_init(int cols, int rows) {
             | SPI_CR1_MSTR;  // master mode
     SPI2->CR2 = SPI_CR2_SSOE | SPI_CR2_TXDMAEN;
     SPI2->CR1 |= SPI_CR1_SPE; // Enable SPI
-}
 
-int main(void) {
-    halInit();
-    chSysInit();
-
-    video_init(0, 0);
-
-    palSetPadMode(GPIOB, 7, PAL_MODE_OUTPUT_PUSHPULL);
-    while (1) {
-      palSetPad(GPIOB, 7);
-      chThdSleepMilliseconds(500);
-      palClearPad(GPIOB, 7);
-      chThdSleepMilliseconds(500);
-    }
+    // Configure DMA
+    DMA1_Channel5->CCR = DMA_CCR5_PL // very high priority
+            | DMA_CCR5_MINC  // memory increment mode
+            | DMA_CCR5_DIR;  // read from memory, not peripheral
+    DMA1_Channel5->CPAR = (uint32_t) &(SPI2->DR); // where to write to
 }
