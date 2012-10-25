@@ -7,11 +7,10 @@ static uint8_t linedata[416/8];
 
 void display_init(void) {
     int i;
-    memset(linedata, 0, sizeof(linedata));
-    linedata[0] = 0xFF;
-    linedata[sizeof(linedata) - 1] = 0xFF;
-    for (i = 20; i < 30; i++)
-        linedata[i] = 0xF0;
+    memset(linedata, 0xFF, sizeof(linedata));
+    linedata[0] = 0;
+    linedata[sizeof(linedata) - 1] = 0;
+    memset(linedata + 20, 0, 10);
 }
 
 void* display_getline(int line) {

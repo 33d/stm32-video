@@ -45,6 +45,8 @@ CH_IRQ_HANDLER(TIM4_IRQHandler) {
 
     // start the DMA transfer for this line, if there's any data
     if (video_next_line) {
+        // Switch signal pin to alternate mode
+        GPIOB->MODER ^= GPIO_MODER_MODER15;
         DMA1_Channel5->CMAR = (uint32_t) video_next_line; // where to read from
         DMA1_Channel5->CCR &= ~DMA_CCR5_EN;
         DMA1_Channel5->CNDTR = video_cols / 8;
@@ -65,6 +67,12 @@ CH_IRQ_HANDLER(TIM4_IRQHandler) {
     // Get the next line of data
     if (video_line_data_func)
         video_next_line = (*video_line_data_func)(video_line);
+}
+
+CH_IRQ_HANDLER(Custom_DMA1_Ch5_IRQHandler) {
+    // Switch signal pin to output mode, so it goes low
+    GPIOB->MODER ^= GPIO_MODER_MODER15;
+    DMA1->IFCR &= ~DMA_IFCR_CTCIF5;
 }
 
 void video_init(int cols, int rows) {
@@ -97,6 +105,8 @@ void video_init(int cols, int rows) {
 
     palSetPadMode(GPIOB, 15, PAL_MODE_ALTERNATE(5) |
                              PAL_STM32_OSPEED_HIGHEST);           /* MOSI.    */
+    /* Make sure the output is low, for when we turn off SPI */
+    GPIOB->ODR &= ~GPIO_OTYPER_ODR_15;
     SPI2->CR1 = SPI_CR1_BR_0 // divide clock by 4
             | SPI_CR1_CPOL | SPI_CR1_SSM | SPI_CR1_SSI
             | SPI_CR1_MSTR;  // master mode
@@ -106,6 +116,7 @@ void video_init(int cols, int rows) {
     // Configure DMA
     DMA1_Channel5->CCR = DMA_CCR5_PL // very high priority
             | DMA_CCR5_MINC  // memory increment mode
-            | DMA_CCR5_DIR;  // read from memory, not peripheral
+            | DMA_CCR5_DIR   // read from memory, not peripheral
+            | DMA_CCR5_TCIE; // Interrupt on finish, to pull the signal low
     DMA1_Channel5->CPAR = (uint32_t) &(SPI2->DR); // where to write to
 }
