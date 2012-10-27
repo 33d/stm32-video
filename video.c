@@ -85,7 +85,7 @@ void video_init(int cols, int rows) {
     rccEnableAPB1(RCC_APB1ENR_SPI2EN, 0); // Enable SPI2 clock, run at SYSCLK
     rccEnableAHB(RCC_AHBENR_DMA1EN, 0); // Enable DMA clock, run at SYSCLK
 
-    nvicEnableVector(TIM4_IRQn, CORTEX_PRIORITY_MASK(7));
+    nvicEnableVector(TIM4_IRQn, CORTEX_PRIORITY_MASK(0));
 
     // sync output
     palSetPadMode(GPIOB, 9, PAL_MODE_ALTERNATE(2) |
