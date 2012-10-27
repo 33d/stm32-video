@@ -45,8 +45,9 @@ CH_IRQ_HANDLER(TIM4_IRQHandler) {
 
     // start the DMA transfer for this line, if there's any data
     if (video_next_line) {
-        // Switch signal pin to alternate mode
-        GPIOB->MODER ^= GPIO_MODER_MODER15;
+        // Switch to alternative mode
+        GPIOB->MODER &= ~GPIO_MODER_MODER15;
+        GPIOB->MODER |= GPIO_MODER_MODER15_1;
         DMA1_Channel5->CMAR = (uint32_t) video_next_line; // where to read from
         DMA1_Channel5->CCR &= ~DMA_CCR5_EN;
         DMA1_Channel5->CNDTR = video_cols / 8;
@@ -71,10 +72,12 @@ CH_IRQ_HANDLER(TIM4_IRQHandler) {
 }
 
 CH_IRQ_HANDLER(Custom_DMA1_Ch5_IRQHandler) {
-    // Switch signal pin to output mode, so it goes low
-    GPIOB->MODER ^= GPIO_MODER_MODER15;
-    palClearPad(GPIOB, 15); // pull the pin low
-    DMA1->IFCR &= ~DMA_IFCR_CTCIF5;
+    DMA1->IFCR = DMA_IFCR_CTCIF5;
+    // Switch to normal GPIO output mode
+    GPIOB->MODER &= ~GPIO_MODER_MODER15;
+    GPIOB->MODER |= GPIO_MODER_MODER15_0;
+    // Pull the video line low
+    GPIOB->BSRR.H.clear = 1<<15;
 }
 
 void video_init(int cols, int rows) {
@@ -87,6 +90,7 @@ void video_init(int cols, int rows) {
     rccEnableAHB(RCC_AHBENR_DMA1EN, 0); // Enable DMA clock, run at SYSCLK
 
     nvicEnableVector(TIM4_IRQn, CORTEX_PRIORITY_MASK(0));
+    nvicEnableVector(DMA1_Channel5_IRQn, CORTEX_PRIORITY_MASK(0));
 
     // sync output
     palSetPadMode(GPIOB, 9, PAL_MODE_ALTERNATE(2) |
@@ -103,7 +107,7 @@ void video_init(int cols, int rows) {
     TIM4->DIER = TIM_DIER_CC3IE; // enable interrupt on picture start
     TIM4->ARR = 1000; // dummy values for now, will be updated in the interrupt
     TIM4->CCR4 = 500;
-    TIM4->CCR3 = STM32_SYSCLK * (0.0000047 + 0.00000165); // picture data start
+    TIM4->CCR3 = STM32_SYSCLK * (0.0000047 + 0.0000057); // picture data start
     TIM4->CR1 |= TIM_CR1_CEN; // enable the counter
 
     palSetPadMode(GPIOB, 15, PAL_MODE_ALTERNATE(5) |
