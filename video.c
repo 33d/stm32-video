@@ -5,7 +5,6 @@
 #include "video.h"
 #include <stdlib.h>
 
-#define LINES_PER_FIELD 304
 /* The number of "virtual" lines for PAL */
 #define PAL_LINES_TOTAL 640
 
@@ -41,7 +40,8 @@ static const LineInfo* video_next_line_change = &lineInfo[0];
 static void* video_next_line = NULL;
 
 CH_IRQ_HANDLER(TIM4_IRQHandler) {
-    TIM4->SR &= ~TIM_SR_UIF; // clear the interrupt flag
+    // Start of line, adjust the timings
+    TIM4->SR &= ~TIM_SR_CC3IF; // clear the interrupt flag
 
     // start the DMA transfer for this line, if there's any data
     if (video_next_line) {
@@ -64,6 +64,7 @@ CH_IRQ_HANDLER(TIM4_IRQHandler) {
         if (video_next_line_change->line == -1)
             video_next_line_change = &lineInfo[0];
     }
+
     // Get the next line of data
     if (video_line_data_func)
         video_next_line = (*video_line_data_func)(video_line);
@@ -98,9 +99,10 @@ void video_init(int cols, int rows) {
             | TIM_CCMR2_OC4PE; // preload enable
     TIM4->CCER = TIM_CCER_CC4P // active low output
              | TIM_CCER_CC4E; // enable output
-    TIM4->DIER = TIM_DIER_UIE; // enable interrupt on "update" (ie. overflow)
+    TIM4->DIER = TIM_DIER_CC3IE; // enable interrupt on picture start
     TIM4->ARR = 1000; // dummy values for now, will be updated in the interrupt
     TIM4->CCR4 = 500;
+    TIM4->CCR3 = STM32_SYSCLK * (0.0000047 + 0.00000165); // picture data start
     TIM4->CR1 |= TIM_CR1_CEN; // enable the counter
 
     palSetPadMode(GPIOB, 15, PAL_MODE_ALTERNATE(5) |
