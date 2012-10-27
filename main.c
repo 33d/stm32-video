@@ -2,13 +2,17 @@
 #include "hal.h"
 #include "video.h"
 #include "display.h"
+#include "lissajous.h"
 
 int main(void) {
     halInit();
     chSysInit();
 
-    display_init();
-    video_line_data_func = &display_getline;
+//    display_init();
+//    video_line_data_func = &display_getline;
+//    video_init(416, 0);
+    lissajous_init(416, 305);
+    video_line_data_func = &lissajous_getline;
     video_init(416, 0);
 
     palSetPadMode(GPIOB, 7, PAL_MODE_OUTPUT_PUSHPULL);

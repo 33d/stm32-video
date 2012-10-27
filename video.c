@@ -112,6 +112,7 @@ void video_init(int cols, int rows) {
     GPIOB->ODR &= ~GPIO_OTYPER_ODR_15;
     SPI2->CR1 = SPI_CR1_BR_0 // divide clock by 4
             | SPI_CR1_CPOL | SPI_CR1_SSM | SPI_CR1_SSI
+            | SPI_CR1_LSBFIRST // LSB first, .xbm style
             | SPI_CR1_MSTR;  // master mode
     SPI2->CR2 = SPI_CR2_SSOE | SPI_CR2_TXDMAEN;
     SPI2->CR1 |= SPI_CR1_SPE; // Enable SPI

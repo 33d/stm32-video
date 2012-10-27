@@ -81,6 +81,7 @@ CSRC = $(PORTSRC) \
        $(CHIBIOS)/os/various/syscalls.c \
        video.c \
        display.c \
+       lissajous.c \
        main.c
 
 # C++ sources that can be compiled in ARM or THUMB mode depending on the global
@@ -195,7 +196,7 @@ UINCDIR =
 ULIBDIR =
 
 # List all user libraries here
-ULIBS =
+ULIBS = -lm
 
 #
 # End of user defines
