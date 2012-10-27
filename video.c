@@ -73,6 +73,7 @@ CH_IRQ_HANDLER(TIM4_IRQHandler) {
 CH_IRQ_HANDLER(Custom_DMA1_Ch5_IRQHandler) {
     // Switch signal pin to output mode, so it goes low
     GPIOB->MODER ^= GPIO_MODER_MODER15;
+    palClearPad(GPIOB, 15); // pull the pin low
     DMA1->IFCR &= ~DMA_IFCR_CTCIF5;
 }
 
