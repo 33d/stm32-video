@@ -20,15 +20,15 @@ typedef struct {
 } LineInfo;
 
 const LineInfo lineInfo[] = {
-    {   0, PAL_SYNC_LONG , PAL_SYNC_HALF }, // vsync
-    {   5, PAL_SYNC_SHORT, PAL_SYNC_HALF }, // post-eq
-    {  10, PAL_SYNC_SHORT, PAL_SYNC_FULL }, // normal lines
-    { 315, PAL_SYNC_SHORT, PAL_SYNC_HALF }, // pre-eq
-    { 320, PAL_SYNC_LONG , PAL_SYNC_HALF }, // vsync
-    { 325, PAL_SYNC_SHORT, PAL_SYNC_HALF }, // post-eq
-    { 329, PAL_SYNC_SHORT, PAL_SYNC_FULL }, // normal
-    { 634, PAL_SYNC_SHORT, PAL_SYNC_HALF }, // pre-eq
-    { -1, -1, -1 } // end
+    {   0, PAL_SYNC_LONG , PAL_SYNC_HALF }, // vsync          x5
+    {   5, PAL_SYNC_SHORT, PAL_SYNC_HALF }, // post-eq        x5
+    {  10, PAL_SYNC_SHORT, PAL_SYNC_FULL }, // normal lines x305
+    { 315, PAL_SYNC_SHORT, PAL_SYNC_HALF }, // pre-eq         x5
+    { 320, PAL_SYNC_LONG , PAL_SYNC_HALF }, // vsync          x5
+    { 325, PAL_SYNC_SHORT, PAL_SYNC_HALF }, // post-eq        x4
+    { 329, PAL_SYNC_SHORT, PAL_SYNC_FULL }, // normal       x305
+    { 634, PAL_SYNC_SHORT, PAL_SYNC_HALF }, // pre-eq         x6
+    { 640, -1, -1 } // end (read, but not used)
 };
 
 LineDataFunc video_line_data_func;
@@ -55,14 +55,14 @@ CH_IRQ_HANDLER(TIM4_IRQHandler) {
 
     // prepare the next line
     ++video_line;
-    if (video_line >= PAL_LINES_TOTAL)
+    if (video_line >= PAL_LINES_TOTAL) {
         video_line = 0;
+        video_next_line_change = &lineInfo[0];
+    }
     if (video_line == video_next_line_change->line) {
         TIM4->ARR = video_next_line_change->duration;
         TIM4->CCR4 = video_next_line_change->pulse;
         video_next_line_change++;
-        if (video_next_line_change->line == -1)
-            video_next_line_change = &lineInfo[0];
     }
 
     // Get the next line of data
