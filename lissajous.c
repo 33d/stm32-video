@@ -22,8 +22,8 @@ static msg_t lissajous_calculate_origin(void* p) {
         chSysUnlock();
 
         ++lissajous_t;
-        int x = lissajous_W/2 * sin(7.0*lissajous_t*0.01) + lissajous_W/2;
-        int y = lissajous_H/2 * sin(6.0*lissajous_t*0.01) + lissajous_H/2;
+        int x = lissajous_W/2 * sin(7.0*lissajous_t*0.005) + lissajous_W/2;
+        int y = lissajous_H/2 * sin(6.0*lissajous_t*0.005) + lissajous_H/2;
         lissajous_line_start = hackadl_logo_bits
                 + (hackadl_logo_width/8 * y)
                 + x;
