@@ -39,9 +39,9 @@ static int video_line = 0;
 static const LineInfo* video_next_line_change = &lineInfo[0];
 static void* video_next_line = NULL;
 
+//__attribute__((long_call, section (".data")))
 CH_IRQ_HANDLER(TIM4_IRQHandler) {
     // Start of line, adjust the timings
-    TIM4->SR &= ~TIM_SR_CC3IF; // clear the interrupt flag
 
     // start the DMA transfer for this line, if there's any data
     if (video_next_line) {
@@ -53,6 +53,8 @@ CH_IRQ_HANDLER(TIM4_IRQHandler) {
         DMA1_Channel5->CNDTR = video_cols / 8;
         DMA1_Channel5->CCR |= DMA_CCR5_EN;
     }
+
+    TIM4->SR &= ~TIM_SR_CC3IF; // clear the interrupt flag
 
     // prepare the next line
     ++video_line;

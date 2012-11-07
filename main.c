@@ -15,6 +15,8 @@ int main(void) {
     video_line_data_func = &vscroll_getline;
     video_init(400, 0);
 
+    nvicDisableVector(SysTick_IRQn);
+
     palSetPadMode(GPIOB, 7, PAL_MODE_OUTPUT_PUSHPULL);
     while (1) {
       palSetPad(GPIOB, 7);

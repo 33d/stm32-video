@@ -1,4 +1,4 @@
-#include "hackadl-logo.xbm"
+#include "knot.xbm"
 #include "vscroll.h"
 #include <stdlib.h>
 #include <math.h>
@@ -12,7 +12,7 @@ static int vscroll_dir = 2;
 
 void vscroll_init(int width, int height) {
     vscroll_height = height;
-    vscroll_H = hackadl_logo_height - height;
+    vscroll_H = knot_height - height;
 }
 
 void* vscroll_getline(int line) {
@@ -24,12 +24,12 @@ void* vscroll_getline(int line) {
         else if (vscroll_line == 0)
             vscroll_dir = 2;
         vscroll_line += vscroll_dir;
-        vscroll_line_start = hackadl_logo_bits + ((hackadl_logo_width/8)*vscroll_line);
+        vscroll_line_start = knot_bits + ((knot_width/8)*vscroll_line);
     }
 
     if (line > 28 && line < 297) {
         void* start = vscroll_line_start;
-        vscroll_line_start += hackadl_logo_width/8;
+        vscroll_line_start += knot_width/8;
         return start;
     }
     return NULL;
